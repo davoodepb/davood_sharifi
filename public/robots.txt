@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://davood-sharifi.vercel.app/sitemap.xml
+Sitemap: https://davoodsharifi.vercel.app/sitemap.xml
