@@ -210,6 +210,10 @@ export const logisticsService = {
 
     if (supabase) {
       await supabase.from("checklist_items")
+        .update({ checked: false })
+        .eq("checklist_id", updatedChecklist.id);
+
+      await supabase.from("checklist_items")
         .update({ checked: true })
         .in("id", checkedItemIds);
 

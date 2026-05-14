@@ -4,7 +4,21 @@ import type { ExtractedTransportData } from "@/features/logistics/types";
 
 GlobalWorkerOptions.workerSrc = workerSrc;
 
-const toNumber = (value: string) => Number.parseFloat(value.replace(".", "").replace(",", "."));
+const parsePTFormattedNumber = (value: string) => {
+  const normalized = value.trim();
+
+  if (normalized.includes(",") && normalized.includes(".")) {
+    return Number.parseFloat(normalized.replaceAll(".", "").replace(",", "."));
+  }
+
+  if (normalized.includes(",")) {
+    // Transport guides in this workflow follow PT formatting:
+    // comma decimal separator and optional dot thousand separator.
+    return Number.parseFloat(normalized.replace(",", "."));
+  }
+
+  return Number.parseFloat(normalized);
+};
 
 const parseItemLine = (line: string) => {
   const normalized = line.trim().replace(/\s+/g, " ");
@@ -16,7 +30,7 @@ const parseItemLine = (line: string) => {
     const quantidadeRaw = strictColumns.at(-2) ?? "0";
     const artigo = strictColumns[0];
     const descricao = strictColumns.slice(1, -2).join(" ");
-    const quantidade = toNumber(quantidadeRaw);
+    const quantidade = parsePTFormattedNumber(quantidadeRaw);
 
     if (Number.isFinite(quantidade) && artigo && descricao && unidade) {
       return { artigo, descricao, quantidade, unidade };
@@ -27,7 +41,7 @@ const parseItemLine = (line: string) => {
   if (!match) return null;
 
   const [, artigo, descricao, quantidadeRaw, unidade] = match;
-  const quantidade = toNumber(quantidadeRaw);
+  const quantidade = parsePTFormattedNumber(quantidadeRaw);
   if (!Number.isFinite(quantidade)) return null;
 
   return { artigo, descricao, quantidade, unidade };

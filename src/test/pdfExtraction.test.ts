@@ -19,4 +19,26 @@ describe("extractTransportDataFromText", () => {
       { artigo: "AR02", descricao: "Produto B industrial", quantidade: 2.5, unidade: "KG" },
     ]);
   });
+
+  it("keeps decimal point values when parsing quantities", () => {
+    const text = `
+      Chave AT: AT-55
+      AR03  Produto C  1.5  UN
+      AR04  Produto D  1.234,56  KG
+    `;
+
+    const result = extractTransportDataFromText(text);
+    expect(result.items[0].quantidade).toBe(1.5);
+    expect(result.items[1].quantidade).toBe(1234.56);
+  });
+
+  it("treats comma values as decimal in PT transport format", () => {
+    const text = `
+      Chave AT: AT-56
+      AR05  Produto E  1,234  UN
+    `;
+
+    const result = extractTransportDataFromText(text);
+    expect(result.items[0].quantidade).toBe(1.234);
+  });
 });

@@ -65,8 +65,8 @@ const PdfUploadPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {extracted.items.map((item) => (
-                    <tr key={`${item.artigo}-${item.descricao}`} className="border-t">
+                  {extracted.items.map((item, index) => (
+                    <tr key={`${item.artigo}-${index}`} className="border-t">
                       <td className="p-2">{item.artigo}</td>
                       <td className="p-2">{item.descricao}</td>
                       <td className="p-2">{item.quantidade}</td>

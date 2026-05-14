@@ -7,4 +7,5 @@ export const supabase = supabaseUrl && supabaseAnonKey
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
+// When not configured, services intentionally fall back to local/offline storage.
 export const isSupabaseConfigured = Boolean(supabase);

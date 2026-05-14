@@ -43,11 +43,9 @@ export const exportChecklistToXlsx = async (checklist: Checklist, submission?: S
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Checklist");
 
-  worksheet.addRow(headers);
-  rowsFromChecklist(checklist, submission).forEach((row) => worksheet.addRow(row));
-
-  worksheet.getRow(1).font = { bold: true };
   worksheet.columns = headers.map((header) => ({ header, width: Math.max(header.length + 4, 18) }));
+  rowsFromChecklist(checklist, submission).forEach((row) => worksheet.addRow(row));
+  worksheet.getRow(1).font = { bold: true };
 
   const buffer = await workbook.xlsx.writeBuffer();
   return new Blob([buffer], {

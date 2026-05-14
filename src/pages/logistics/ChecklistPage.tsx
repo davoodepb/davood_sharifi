@@ -24,7 +24,7 @@ const ChecklistPage = () => {
     });
   }, [token]);
 
-  const savedAt = useMemo(() => new Date().toLocaleString(), []);
+  const viewedAt = useMemo(() => new Date().toLocaleString(), []);
 
   const toggle = (itemId: string) => {
     setCheckedItems((prev) => (prev.includes(itemId) ? prev.filter((id) => id !== itemId) : [...prev, itemId]));
@@ -48,7 +48,7 @@ const ChecklistPage = () => {
     <AppLayout title="Checklist">
       <form className="space-y-4 rounded-xl border bg-white p-4" onSubmit={onSubmit}>
         <p className="text-sm font-semibold">Código AT: {checklist.codigo_at}</p>
-        <p className="text-xs text-slate-500">Salvo em: {savedAt}</p>
+        <p className="text-xs text-slate-500">Visualizado em: {viewedAt}</p>
 
         <div className="space-y-2">
           {checklist.items.map((item) => (
