@@ -1,22 +1,24 @@
 {
-  "name": "Davood Sharifi - Portfolio & CV",
-  "short_name": "Davood CV",
-  "description": "Professional CV, portfolio, and shop by Davood Sharifi",
+  "name": "Logística Checklist PWA",
+  "short_name": "Checklist",
+  "description": "Aplicação mobile-first para checklist logístico com extração de PDF.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f5f7fa",
-  "theme_color": "#2563eb",
-  "orientation": "portrait-primary",
+  "background_color": "#eff6ff",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
