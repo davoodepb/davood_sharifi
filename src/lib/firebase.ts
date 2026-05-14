@@ -1,18 +1,26 @@
 import { initializeApp } from "firebase/app";
+import { getAnalytics, isSupported as analyticsSupported } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getMessaging, isSupported as messagingSupported } from "firebase/messaging";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBv8WZcPZLEbztokiaQVc4n0V5a_46k2Jo",
-  authDomain: "cv-davood-54a28.firebaseapp.com",
-  projectId: "cv-davood-54a28",
-  storageBucket: "cv-davood-54a28.firebasestorage.app",
-  messagingSenderId: "229871578685",
-  appId: "1:229871578685:web:43ccc938545a3efd254454",
-  measurementId: "G-NF4V8XWVBS"
+  apiKey: "AIzaSyClBw569jLYXKWL6lr5hYl-3ppCT7_PzJg",
+  authDomain: "n8n-prudencio.firebaseapp.com",
+  databaseURL: "https://n8n-prudencio-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "n8n-prudencio",
+  storageBucket: "n8n-prudencio.firebasestorage.app",
+  messagingSenderId: "397008230620",
+  appId: "1:397008230620:web:a17568b43bca763719bc19",
+  measurementId: "G-EJEFSVQHLD",
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export default app;
+export const firebaseApp = initializeApp(firebaseConfig);
+export const firebaseAuth = getAuth(firebaseApp);
+
+export const firebaseAnalyticsPromise = analyticsSupported().then((supported) =>
+  supported ? getAnalytics(firebaseApp) : null,
+);
+
+export const firebaseMessagingPromise = messagingSupported().then((supported) =>
+  supported ? getMessaging(firebaseApp) : null,
+);
